@@ -8,6 +8,10 @@ While snpm is linking it's `node_modules` to it's **Main Directory** that locate
 This wrapper is only some experiment that i made to saves my storage space for good. 
 Because this wrapper is only experiment wrapper, Don't expect something is good / completely good. There's also some part that i should fix it. You're also free to open PR for some changes.
 
+## Requirements
+- Has [NodeJS](https://nodejs.org) installed with `npm`
+- Has `jq` package installed. Used for parsing jsons.
+
 ## Installing
 ```bash
 curl -L# https://raw.githubusercontent.com/Yonle/snpm/master/snpm -o $PREFIX/bin/snpm
