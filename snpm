@@ -32,15 +32,15 @@ if [ ! -f $PKGS_DIR/remove ]; then
 	echo -n "[snpm] Creating Package Remover.... "
 	cat > $PKGS_DIR/remove <<- EOM
 		#!/usr/bin/env bash
-		if [ ! $PKGS_DIR ]; then PKGS_DIR=$HOME/.snpm; fi
-		if [ ! $NPM_BINS ]; then NPM_BINS=npm; fi
+		if [ ! \$PKGS_DIR ]; then PKGS_DIR=\$HOME/.snpm; fi
+		if [ ! \$NPM_BINS ]; then NPM_BINS=npm; fi
 
-		if [ ! $1 ]; then echo "Usage: snpm remove [pkgname]"; exit 1; fi
-		cd $PKGS_DIR
-		ln -sr $PKGS_DIR/.packages $PKGS_DIR/node_modules
-		$NPM_BINS init -y
-		$NPM_BINS remove $@ --no-save
-		rm $PKGS_DIR/node_modules
+		if [ ! \$1 ]; then echo "Usage: snpm remove [pkgname]"; exit 1; fi
+		cd \$PKGS_DIR
+		ln -sr \$PKGS_DIR/.packages \$PKGS_DIR/node_modules
+		\$NPM_BINS init -y
+		\$NPM_BINS remove $@ --no-save
+		rm \$PKGS_DIR/node_modules
 	EOM
 	chmod +x $PKGS_DIR/remove
 	echo "Done"
