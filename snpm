@@ -28,7 +28,42 @@ if [ ! -f $PKGS_DIR/package.json ]; then
 	echo "Done"
 fi
 
-if [ ! $1 ]; then echo "Usage: snpm [pkgname]"; exit 1; fi
+if [ ! -f $PKGS_DIR/remove ]; then
+	echo -n "[snpm] Creating Package Remover.... "
+	cat > $PKGS_DIR/remove <<- EOM
+		#!/usr/bin/env bash
+		if [ ! $PKGS_DIR ]; then PKGS_DIR=$HOME/.snpm; fi
+		if [ ! $NPM_BINS ]; then NPM_BINS=npm; fi
+
+		if [ ! $1 ]; then echo "Usage: snpm remove [pkgname]"; exit 1; fi
+		cd $PKGS_DIR
+		ln -sr $PKGS_DIR/.packages $PKGS_DIR/node_modules
+		$NPM_BINS init -y
+		$NPM_BINS remove $@ --no-save
+		rm $PKGS_DIR/node_modules
+	EOM
+	chmod +x $PKGS_DIR/remove
+	echo "Done"
+fi
+
+if [ ! $1 ]; then
+	cat <<- EOF
+
+	Usage: snpm [method] [args]
+
+	Methods:
+	
+	 install - Installing packages
+	 remove  - Uninstalling/Removing packages
+	
+	EOF
+	exit 1
+fi
+
+if [ $1 == "remove" ]; then
+	bash -c "$PKGS_DIR/$@"
+	exit 0
+fi
 
 if [ ! -x $PKGS_DIR/node_modules ]; then mkdir $PKGS_DIR/node_modules; fi
 if [ ! -x $PKGS_DIR/.packages ]; then mkdir $PKGS_DIR/.packages; fi
@@ -36,7 +71,7 @@ mv $PKGS_DIR/package.json $PKGS_DIR/package.backup.json
 cp $(pwd)/package.json $PKGS_DIR/package.json
 cd $PKGS_DIR
 echo "[snpm] Executing \"$NPM_BINS $@\"...."
-$NPM_BINS install $@
+$NPM_BINS $@
 mv $PKGS_DIR/package.json $LAST_PWD/package.json
 mv $PKGS_DIR/package.backup.json $PKGS_DIR/package.json
 echo -n "[snpm] Saving to $PKGS_DIR/.packages.... "

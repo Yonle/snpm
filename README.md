@@ -23,8 +23,11 @@ chmod +x $PREFIX/bin/snpm
 
 ## Installing packages
 ```bash
-snpm <pkg name. Use space to install multiple package>
+snpm install <pkg name. Use space to install multiple package>
 ```
 
 ## Uninstalling packages
-To uninstall packages, Do this:
+To uninstall packages, Go to `~/.snpm` directory, There's a binary files called `remover`. Do `./remover [package name that want to removed]`. 
+
+Alternative, Do `snpm remove [pkg name]`
+
