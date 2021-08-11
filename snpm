@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+LAST_PWD=$(pwd)
+
+if [ ! $PKGS_DIR ]; then PKGS_DIR=$HOME/.snpm; fi
+if [ ! $NPM_BINS ]; then NPM_BINS=$PREFIX/bin/npm; fi
+if [ ! -r $PKGS_DIR ]; then mkdir $PKGS_DIR; fi
+
+if [ ! -f $(pwd)/package.json ]; then
+	echo "[snpm] Initializing.... "
+	npm init -y
+fi
+
+if [ ! -x $(pwd)/node_modules ]; then 
+	echo "[snpm] Linking...."
+	ln -sr $PKGS_DIR/node_modules $(pwd)/node_modules
+	echo ">=> Linked node_modules"
+fi
+
+mv $PKGS_DIR/package.json $PKGS_DIR/package.backup.json
+cp $(pwd)/package.json $PKGS_DIR/package.json
+cd $PKGS_DIR
+echo "[snpm] Executing \"$NPM_BINS $@\"...."
+$NPM_BINS $@
+mv $PKGS_DIR/package.json $LAST_PWD/package.json
+mv package.backup.json package.json
