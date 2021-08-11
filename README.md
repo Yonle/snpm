@@ -10,7 +10,7 @@ Because this wrapper is only experiment wrapper, Don't expect something is good 
 
 ## Requirements
 - Has [NodeJS](https://nodejs.org) installed with `npm`
-- Has `jq` package installed. Used for parsing jsons.
+- Has [jq](https://stedolan.github.io/jq) package installed. Used for parsing jsons.
 
 ## Installing
 ```bash
