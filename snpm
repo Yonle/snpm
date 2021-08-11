@@ -40,14 +40,3 @@ echo -n "[snpm] Saving to $PKGS_DIR/.packages.... "
 cp -rf $PKGS_DIR/node_modules/* $PKGS_DIR/.packages > /dev/null
 rm -rf $PKGS_DIR/node_modules && mkdir $PKGS_DIR/node_modules
 echo "Done"
-
-echo -e "\n\n== It's now safe to exit. Do CONTROL + C =="
-echo -e "You may ignore those package list below.\n\n"
-echo "[snpm] All Installed Package list:"
-for pkg in $(ls $PKGS_DIR/.packages); do
-	PKG_NAME=`cat $PKGS_DIR/.packages/$pkg/package.json | jq -r .name`
-	PKG_DESCRIPTION=`cat $PKGS_DIR/.packages/$pkg/package.json | jq -r .description`
-	PKG_VERSION=`cat $PKGS_DIR/.packages/$pkg/package.json | jq -r .version`
-	echo -e "\n • $PKG_NAME/$PKG_VERSION"
-	echo $PKG_DESCRIPTION
-done;
