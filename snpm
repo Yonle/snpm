@@ -17,6 +17,11 @@ if [ ! -x $(pwd)/node_modules ]; then
 	echo ">=> Linked node_modules"
 fi
 
+if [ ! -f $PKGS_DIR/package.json ]; then
+	echo "[snpm] Initializing for first time use"
+	cd $PKGS_DIR && npm init
+fi
+
 mv $PKGS_DIR/package.json $PKGS_DIR/package.backup.json
 cp $(pwd)/package.json $PKGS_DIR/package.json
 cd $PKGS_DIR
