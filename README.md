@@ -20,3 +20,11 @@ chmod +x $PREFIX/bin/snpm
 ## Variables
 * `PKGS_DIR` is used to locate where a package should be stored / where it's stored. Default is `~/.snpm`
 * `NPM_BINS` is used to locate where `npm` binary located. Used to execute a command. Default is `$PREFIX/bin/npm`
+
+## Installing packages
+```bash
+snpm <pkg name. Use space to install multiple package>
+```
+
+## Uninstalling packages
+To uninstall packages, Do this:
