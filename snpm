@@ -14,7 +14,12 @@ fi
 if [ ! -x $(pwd)/node_modules ]; then 
 	echo "[snpm] Linking...."
 	ln -sr $PKGS_DIR/node_modules $(pwd)/node_modules
-	echo ">=> Linked node_modules"
+	if [ $? != 0 ]; then 
+		rm $(pwd)/node_modules
+		echo "[snpm] Error fixed. Please try again."
+		exit 1
+	fi
+	echo "[snpm] Linked node_modules"
 fi
 
 if [ ! -f $PKGS_DIR/package.json ]; then
