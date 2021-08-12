@@ -27,7 +27,7 @@ snpm install <pkg name. Use space to install multiple package>
 ```
 
 ## Uninstalling packages
-To uninstall packages, Go to `~/.snpm` directory, There's a binary files called `remover`. Do `./remover [package name that want to removed]`. 
+To uninstall packages, Go to `~/.snpm` directory, There's a binary files called `remove`. Do `./remove [package name that want to removed]`. 
 
 Alternative, Do `snpm remove [pkg name]`
 
