@@ -1,3 +1,6 @@
+# Deprecated
+A modules won't load it's dependencies. Please do not use it.
+
 # snpm
 Some well-good npm wrapper that saves your storage space.
 
